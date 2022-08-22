@@ -35,7 +35,8 @@ public class UnitSelectionHandler : MonoBehaviour
     {
         
         if(player==null)
-            player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
+//            player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
+            StartCoroutine(GetHoldOfPlayer());
 
         
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -51,7 +52,12 @@ public class UnitSelectionHandler : MonoBehaviour
             UpdateSelectionArea();
         }
     }
-
+    private IEnumerator GetHoldOfPlayer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
+        
+    }
     private void StartSelectionArea()
     {
         if(!Keyboard.current.leftShiftKey.isPressed)

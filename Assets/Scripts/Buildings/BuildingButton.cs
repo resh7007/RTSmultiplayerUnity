@@ -17,6 +17,7 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler,IPointerUpHandl
     [SerializeField] private LayerMask floorMask = new LayerMask();
 
     private Camera mainCamera;
+    private BoxCollider buildingCollider;
     private RTSPlayerScript player;
     private GameObject buildingPreviewInstance;
     private Renderer buildingRendererInstance;
@@ -26,22 +27,33 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler,IPointerUpHandl
         mainCamera = Camera.main;
         iconImage.sprite = building.GetIcon();
         priceText.text = building.GetPrice().ToString();
+        
+        buildingCollider = building.GetComponent<BoxCollider>();
     }
 
     private void Update()
     {
         if(player==null)
-            player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
-        
+         //   player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
+            StartCoroutine(GetHoldOfPlayer());
+
         if(buildingPreviewInstance == null) return;
         
         UpdateBuildingPreview();
     }
 
+    private IEnumerator GetHoldOfPlayer()
+    {
+        yield return new WaitForSeconds(0.5f);
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
+        
+    }
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) return;
-
+        
+        if(player.GetResources() < building.GetPrice()) return;
+        
         buildingPreviewInstance = Instantiate(building.GetBuildingPreview());
         buildingRendererInstance = buildingPreviewInstance.GetComponentInChildren<Renderer>();
         buildingPreviewInstance.SetActive(false);
@@ -69,5 +81,8 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler,IPointerUpHandl
         
         if(!buildingPreviewInstance.activeSelf)
             buildingPreviewInstance.SetActive(true);
+
+        Color color = player.CanPlaceBuilding(buildingCollider, hit.point) ? Color.green : Color.red;
+        buildingRendererInstance.material.SetColor("_BaseColor", color);
     }
 }

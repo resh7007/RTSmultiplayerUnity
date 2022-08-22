@@ -7,9 +7,11 @@ using UnityEngine;
 
 public class RTSPlayerScript : NetworkBehaviour
 {
-     private List<Unit> myUnits = new List<Unit>();
+    [SerializeField] private LayerMask buildingBlockLayer = new LayerMask();
+    [SerializeField] private Building[] buildings = new Building[0];
+    [SerializeField] private float buildingRangeLimit = 5;
+    private List<Unit> myUnits = new List<Unit>();
      private List<Building> myBuildings = new List<Building>();
-     [SerializeField] private Building[] buildings = new Building[0];
      [SyncVar (hook = nameof(ClientHandleResourcesUpdated))]
      private int resources = 500;
 
@@ -33,6 +35,28 @@ public class RTSPlayerScript : NetworkBehaviour
      public void SetResources(int newResources)
      {
          resources = newResources;
+     }
+
+     public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 pos)
+     {
+         if (Physics.CheckBox(pos + buildingCollider.center,
+                 buildingCollider.size / 2,
+                 Quaternion.identity,
+                 buildingBlockLayer))
+         {
+             return false;
+         }
+  
+         foreach (Building building in myBuildings)
+         { 
+             if ((pos - building.transform.position).sqrMagnitude <= buildingRangeLimit * buildingRangeLimit)
+             {
+                 return true;
+             }
+         }
+
+         return false;
+
      }
 
      #region Server
@@ -68,10 +92,18 @@ public class RTSPlayerScript : NetworkBehaviour
          }
 
          if (buildingToPlace == null) return;
-
-        GameObject buildingInstance = Instantiate(buildingToPlace.gameObject, pos, buildingToPlace.transform.rotation);
         
-        NetworkServer.Spawn(buildingInstance,connectionToClient);
+         if(resources < buildingToPlace.GetPrice()) return;
+
+         BoxCollider buildingCollider = buildingToPlace.GetComponent<BoxCollider>();
+            
+         if(!CanPlaceBuilding(buildingCollider, pos)) return;
+        
+         GameObject buildingInstance = Instantiate(buildingToPlace.gameObject, pos, buildingToPlace.transform.rotation);
+        
+         NetworkServer.Spawn(buildingInstance,connectionToClient);
+         
+         SetResources(resources - buildingToPlace.GetPrice());
      }
 
      private void ServerHandleBuildingSpawned(Building building)
