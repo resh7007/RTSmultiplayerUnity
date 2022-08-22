@@ -10,12 +10,20 @@ public class RTSPlayerScript : NetworkBehaviour
     [SerializeField] private LayerMask buildingBlockLayer = new LayerMask();
     [SerializeField] private Building[] buildings = new Building[0];
     [SerializeField] private float buildingRangeLimit = 5;
-    private List<Unit> myUnits = new List<Unit>();
-     private List<Building> myBuildings = new List<Building>();
-     [SyncVar (hook = nameof(ClientHandleResourcesUpdated))]
-     private int resources = 500;
 
-     public event Action<int> ClientOnResourcesUpdated;
+    private Color teamColor = new Color();
+    private List<Unit> myUnits = new List<Unit>();
+    private List<Building> myBuildings = new List<Building>();
+    [SyncVar (hook = nameof(ClientHandleResourcesUpdated))]
+    private int resources = 500;
+
+
+    public Color GetTeamColor()
+    {
+        return teamColor;
+    }
+
+    public event Action<int> ClientOnResourcesUpdated;
 
      public int GetResources()
      {
@@ -31,11 +39,7 @@ public class RTSPlayerScript : NetworkBehaviour
         return myBuildings;
      }
 
-     [Server]
-     public void SetResources(int newResources)
-     {
-         resources = newResources;
-     }
+
 
      public bool CanPlaceBuilding(BoxCollider buildingCollider, Vector3 pos)
      {
@@ -60,6 +64,17 @@ public class RTSPlayerScript : NetworkBehaviour
      }
 
      #region Server
+     [Server]
+     public void SetResources(int newResources)
+     {
+         resources = newResources;
+     }
+
+     [Server]
+     public void SetColor(Color newColor)
+     { 
+         teamColor = newColor;
+     }
      public override void OnStartServer()
      {
         Unit.ServerOnUnitSpawned += ServerHandleUnitSpawn;

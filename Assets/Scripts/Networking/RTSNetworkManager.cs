@@ -12,10 +12,17 @@ public class RTSNetworkManager : NetworkManager
    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
    {
       base.OnServerAddPlayer(conn);
-     GameObject unitSpawnerInstance= Instantiate(unitSpawnerPrefab, conn.identity.transform.position,
+
+      RTSPlayerScript player = conn.identity.GetComponent<RTSPlayerScript>();
+      player.SetColor(new Color(
+          Random.Range(0f,1f),
+          Random.Range(0f,1f),
+          Random.Range(0f,1f)));
+      
+      GameObject unitSpawnerInstance= Instantiate(unitSpawnerPrefab, conn.identity.transform.position,
           conn.identity.transform.rotation);
      
-     NetworkServer.Spawn(unitSpawnerInstance, conn);
+      NetworkServer.Spawn(unitSpawnerInstance, conn);
    }
 
    public override void OnServerSceneChanged(string sceneName)

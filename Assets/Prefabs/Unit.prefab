@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: -6713790197425326999}
   - component: {fileID: 2851904705895132972}
   - component: {fileID: 543611330145080546}
+  - component: {fileID: 6588944123099571226}
   m_Layer: 8
   m_Name: Unit
   m_TagString: Untagged
@@ -292,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  resourceCost: 10
   health: {fileID: 2851904705895132972}
   _unitMovement: {fileID: -7048154999535716227}
   onSelected:
@@ -417,6 +419,22 @@ MonoBehaviour:
   health: {fileID: 2851904705895132972}
   healthBarParent: {fileID: 5144278886406549700}
   healthBarImage: {fileID: 5144278887281036592}
+--- !u!114 &6588944123099571226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7367582493451955437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77449385b08064b0f8ecf27e27177681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  colorRenderers:
+  - {fileID: 4282626611786510115}
 --- !u!1001 &723926997226607213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -598,6 +616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3b58da64749194dd888963d6c4e07057, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 979848f549fb74d7b8a03a6af80c5e1b, type: 2}
     - target: {fileID: 919132149155446097, guid: 3b58da64749194dd888963d6c4e07057, type: 3}
       propertyPath: m_Name
       value: tank with lazer cannon
@@ -607,5 +629,10 @@ PrefabInstance:
 --- !u!4 &3109136214930003020 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3b58da64749194dd888963d6c4e07057, type: 3}
+  m_PrefabInstance: {fileID: 3219906158433792935}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4282626611786510115 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 3b58da64749194dd888963d6c4e07057, type: 3}
   m_PrefabInstance: {fileID: 3219906158433792935}
   m_PrefabAsset: {fileID: 0}

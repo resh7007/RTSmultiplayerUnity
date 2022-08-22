@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5355726036468513222, guid: f6818d0a3f6ea4f668045e4c8018c382, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6363906507811308316, guid: f6818d0a3f6ea4f668045e4c8018c382, type: 3}
       propertyPath: aimAtPoint
       value: 
@@ -132,6 +136,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1459426015425782861, guid: f6818d0a3f6ea4f668045e4c8018c382, type: 3}
   m_PrefabInstance: {fileID: 2545438956164117179}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &5917015217238328655 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8164536579781048308, guid: f6818d0a3f6ea4f668045e4c8018c382, type: 3}
+  m_PrefabInstance: {fileID: 2545438956164117179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &-3759696623603272276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +163,22 @@ MonoBehaviour:
   maxUnitQueue: 5
   spawnMoveRange: 7
   unitSpawnDuration: 5
+--- !u!114 &7112604146391982890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5962284409029429882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77449385b08064b0f8ecf27e27177681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  colorRenderers:
+  - {fileID: 5917015217238328655}
 --- !u!1001 &3524022749188813900
 PrefabInstance:
   m_ObjectHideFlags: 0
