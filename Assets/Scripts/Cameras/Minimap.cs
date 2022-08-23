@@ -13,16 +13,27 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
    [SerializeField] private float offset = -6;
    
    private Transform playerCameraTransform;
+   private RTSPlayerScript player;
 
    private void Update()
    {
-       if(playerCameraTransform !=null) return;
        
-       if(NetworkClient.connection.identity==null) return;
+       if (player == null)
+       {
+           StartCoroutine(GetHoldOfPlayer());
+           
+       } 
        
-       playerCameraTransform = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>().GetCameraTransform();
    }
 
+   private IEnumerator GetHoldOfPlayer()
+   {
+       yield return new WaitForSeconds(0.5f);
+       playerCameraTransform = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>().GetCameraTransform();
+
+    
+   }
+   
    private void MoveCamera()
    {
       Vector2 mousePos = Mouse.current.position.ReadValue();
@@ -42,7 +53,7 @@ public class Minimap : MonoBehaviour, IPointerDownHandler, IDragHandler
           playerCameraTransform.position.y,
           Mathf.Lerp(-mapScale, mapScale, lerp.y));
 
-      playerCameraTransform.position = newCameraPos + new Vector3(0f, 0f, offset);
+      playerCameraTransform.position = newCameraPos + new Vector3(offset, 0f, offset);
    }
 
    public void OnPointerDown(PointerEventData eventData)

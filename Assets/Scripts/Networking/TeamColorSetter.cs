@@ -25,7 +25,10 @@ public class TeamColorSetter : NetworkBehaviour
     {
         foreach (Renderer renderer in colorRenderers)
         {
-            renderer.material.SetColor("_BaseColor", newColor);
+            renderer.materials[0].SetColor("_BaseColor", newColor);//change
+            if(renderer.materials.Length>1)
+                renderer.materials[1].SetColor("_BaseColor", newColor);//change
+
         }
     }
 
