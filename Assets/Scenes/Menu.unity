@@ -724,7 +724,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 201643943}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 461694340}
+        m_TargetAssemblyTypeName: LobbyMenu, Assembly-CSharp
+        m_MethodName: LeaveLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &201643943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -778,6 +790,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3072579344698962531, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
+      propertyPath: onlineScene
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072579344698962531, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
+      propertyPath: unitBasePrefab
+      value: 
+      objectReference: {fileID: 5962284409029429882, guid: 22d38ec12183e48d887ed3c8cb4dcb11, type: 3}
     - target: {fileID: 3072579344698962531, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
       propertyPath: spawnPrefabs.Array.size
       value: 12
@@ -870,7 +890,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3072579344698962529, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
 --- !u!1 &461694337
 GameObject:
@@ -882,6 +903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 461694338}
   - component: {fileID: 461694339}
+  - component: {fileID: 461694340}
   m_Layer: 0
   m_Name: LobbyParent
   m_TagString: Untagged
@@ -917,6 +939,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 461694337}
   m_CullTransparentMesh: 1
+--- !u!114 &461694340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461694337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b4aede236ce421ba1ded538913da23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyUI: {fileID: 1611337948}
+  startGameButton: {fileID: 1917072165}
 --- !u!1 &504903935
 GameObject:
   m_ObjectHideFlags: 0
@@ -1261,6 +1297,7 @@ GameObject:
   - component: {fileID: 772817976}
   - component: {fileID: 772817978}
   - component: {fileID: 772817977}
+  - component: {fileID: 772817979}
   m_Layer: 0
   m_Name: EnterAddress
   m_TagString: Untagged
@@ -1326,6 +1363,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772817975}
   m_CullTransparentMesh: 1
+--- !u!114 &772817979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772817975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573afa12d44ce4c8cb9a61a5c7db5e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  landingPagePanel: {fileID: 837081922}
+  addressInput: {fileID: 15305963}
+  joinButton: {fileID: 2084990798}
 --- !u!1 &777524729
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,7 +2968,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1727325806}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 772817975}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2084990798}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1727325806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3408,7 +3484,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1917072166}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 461694340}
+        m_TargetAssemblyTypeName: LobbyMenu, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1917072166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3988,7 +4076,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2084990799}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 772817979}
+        m_TargetAssemblyTypeName: JoinLobbyMenu, Assembly-CSharp
+        m_MethodName: Join
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2084990799
 MonoBehaviour:
   m_ObjectHideFlags: 0

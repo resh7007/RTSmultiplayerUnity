@@ -17,7 +17,14 @@ public class RTSPlayerScript : NetworkBehaviour
     private List<Building> myBuildings = new List<Building>();
     [SyncVar (hook = nameof(ClientHandleResourcesUpdated))]
     private int resources = 500;
+    [SyncVar(hook = nameof(AuthorityHandlePartyOwnerStateUpdated))]
+    private bool isPartyOwner = false;
 
+    public static event Action<bool> AuthorityOnPartyOwnerStateUpdated;
+    public bool GetIsPartyOwner()
+    {
+        return isPartyOwner;
+    }
 
     public Transform GetCameraTransform()
     {
@@ -70,6 +77,13 @@ public class RTSPlayerScript : NetworkBehaviour
      }
 
      #region Server
+
+     [Server]
+     public void SetPartyOwner(bool state)
+     {
+         isPartyOwner = state;
+     }
+
      [Server]
      public void SetResources(int newResources)
      {
@@ -97,6 +111,15 @@ public class RTSPlayerScript : NetworkBehaviour
         Building.ServerOnBuildingSpawned -= ServerHandleBuildingSpawned;
         Building.ServerOnBuildingDespawned -= ServerHandleBuildingDespawned;
 
+     }
+
+     [Command]
+     public void CmdStartGame()
+     {
+         if(!isPartyOwner) return;
+         
+         ((RTSNetworkManager)NetworkManager.singleton).StartGame();
+         
      }
 
      [Command]
@@ -166,9 +189,18 @@ public class RTSPlayerScript : NetworkBehaviour
 
      }
 
+     public override void OnStartClient()
+     {
+         if (NetworkServer.active) return; // if this machine is running as a server then return
+           ((RTSNetworkManager) NetworkManager.singleton).Players.Add(this);
+     }
+
      public override void OnStopClient()
      {
-          if (!isClientOnly || !hasAuthority) return;
+          if (!isClientOnly) return;
+          ((RTSNetworkManager) NetworkManager.singleton).Players.Remove(this);
+          if (!hasAuthority) return;
+
           Unit.AuthorityOnUnitSpawned -= AuthorityHandleUnitSpawn;
           Unit.AuthorityOnUnitDespawned -= AuthorityHandleUnitDespawn;
           
@@ -199,6 +231,13 @@ public class RTSPlayerScript : NetworkBehaviour
      private void ClientHandleResourcesUpdated(int oldResources, int newResources)
      {
          ClientOnResourcesUpdated?.Invoke(newResources);
+     }
+
+     private void AuthorityHandlePartyOwnerStateUpdated(bool oldState, bool newState)
+     {
+         if(!hasAuthority) return;
+
+         AuthorityOnPartyOwnerStateUpdated?.Invoke(newState);
      }
 
      #endregion
