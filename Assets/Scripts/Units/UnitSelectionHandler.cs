@@ -22,6 +22,8 @@ public class UnitSelectionHandler : MonoBehaviour
         mainCamera = Camera.main;
         Unit.AuthorityOnUnitDespawned += AuthorityHandleUnitDespawn;
         GameOverHandler.ClientOnGameOver += ClientHandleGameOver;
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
+
     }
 
     private void OnDestroy()
@@ -33,12 +35,6 @@ public class UnitSelectionHandler : MonoBehaviour
 
     private void Update()
     {
-        
-        if(player==null)
-//            player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
-            StartCoroutine(GetHoldOfPlayer());
-
-        
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             StartSelectionArea();
@@ -52,12 +48,7 @@ public class UnitSelectionHandler : MonoBehaviour
             UpdateSelectionArea();
         }
     }
-    private IEnumerator GetHoldOfPlayer()
-    {
-        yield return new WaitForSeconds(0.5f);
-        player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
-        
-    }
+  
     private void StartSelectionArea()
     {
         if(!Keyboard.current.leftShiftKey.isPressed)

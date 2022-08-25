@@ -27,27 +27,21 @@ public class BuildingButton : MonoBehaviour, IPointerDownHandler,IPointerUpHandl
         mainCamera = Camera.main;
         iconImage.sprite = building.GetIcon();
         priceText.text = building.GetPrice().ToString();
-        
+        player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
+
         buildingCollider = building.GetComponent<BoxCollider>();
     }
 
     private void Update()
     {
-        if(player==null)
-         //   player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
-            StartCoroutine(GetHoldOfPlayer());
+ 
 
         if(buildingPreviewInstance == null) return;
         
         UpdateBuildingPreview();
     }
 
-    private IEnumerator GetHoldOfPlayer()
-    {
-        yield return new WaitForSeconds(0.5f);
-        player = NetworkClient.connection.identity.GetComponent<RTSPlayerScript>();
-        
-    }
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         if (eventData.button != PointerEventData.InputButton.Left) return;

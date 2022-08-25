@@ -56,17 +56,15 @@ public class RTSNetworkManager : NetworkManager
 
       RTSPlayerScript player = conn.identity.GetComponent<RTSPlayerScript>();
       Players.Add(player);
+      
+      player.SetDisplayName($"Player {Players.Count}");
       player.SetColor(new Color(
           Random.Range(0f,1f),
           Random.Range(0f,1f),
           Random.Range(0f,1f)));
       
       player.SetPartyOwner(Players.Count==1);
-      
-      // GameObject unitSpawnerInstance= Instantiate(unitSpawnerPrefab, conn.identity.transform.position,
-      //     conn.identity.transform.rotation);
-      //
-      // NetworkServer.Spawn(unitSpawnerInstance, conn);
+  
   }
 
   public override void OnServerSceneChanged(string sceneName)
