@@ -782,6 +782,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3072579344698962528, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3072579344698962530, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
       propertyPath: m_Name
       value: NetworkManager
@@ -791,8 +795,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3072579344698962531, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
+      propertyPath: transport
+      value: 
+      objectReference: {fileID: 1601170322}
+    - target: {fileID: 3072579344698962531, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
       propertyPath: onlineScene
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3072579344698962531, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
+      propertyPath: maxConnections
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3072579344698962531, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
       propertyPath: unitBasePrefab
@@ -2850,6 +2862,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   landingPagePanel: {fileID: 837081922}
+  useSteam: 1
+--- !u!1 &1601170320 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3072579344698962530, guid: c39f6936eba8d4af981d9e1921df1d99, type: 3}
+  m_PrefabInstance: {fileID: 312700352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1601170321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601170320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4bffeda13d7a748973ff9204401c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1601170322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601170320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e55fca1f4e4844593a3dd65a3ecb39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Channels: 0200000001000000
+  Timeout: 25
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
 --- !u!1 &1611337948
 GameObject:
   m_ObjectHideFlags: 0
